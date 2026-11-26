@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helbo Regnskab | Bogføring, moms og løn til fast pris</title>
+<meta name="description" content="Din faste bogholder til bogføring, moms, løn og årsafslutning. Fast månedlig pris, og første møde er gratis.">
+<link rel="canonical" href="https://helboregnskab.dk/">
+<meta name="theme-color" content="#1C5A3A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="da_DK">
+<meta property="og:site_name" content="Helbo Regnskab">
+<meta property="og:title" content="Helbo Regnskab | Bogføring, moms og løn til fast pris">
+<meta property="og:description" content="Din faste bogholder til bogføring, moms, løn og årsafslutning. Fast månedlig pris, og første møde er gratis.">
+<meta property="og:url" content="https://helboregnskab.dk/">
+<meta property="og:image" content="https://helboregnskab.dk/assets/img/helbo-regnskab-logo.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/schibsted-grotesk-400.woff2) format('woff2')}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/schibsted-grotesk-500.woff2) format('woff2')}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/schibsted-grotesk-600.woff2) format('woff2')}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/schibsted-grotesk-700.woff2) format('woff2')}
+@font-face{font-family:Outfit;font-style:normal;font-weight:300;font-display:swap;src:url(/assets/fonts/outfit-300.woff2) format('woff2')}
+@font-face{font-family:Outfit;font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/outfit-600.woff2) format('woff2')}
+
+:root{
+--g-950:#144A2E;--g-900:#1C5A3A;--g-700:#25704A;--g-500:#2F9A5E;--g-400:#45AE72;--g-100:#E1EFE5;--g-50:#F4F8F5;--g-soft:#CDE8D6;
+--g-300:#8FD3A8;--g-line:rgba(28,90,58,.09);--g-sh:rgba(28,90,58,.32);--g-glow:rgba(150,226,175,.30);--bg:#EEF1EE;
+--ink:#13222A;--mut:#46545C;
+--sh-1:0 0 0 1px rgba(19,34,42,.05),0 1px 2px rgba(19,34,42,.05);
+--sh-2:0 0 0 1px rgba(19,34,42,.05),0 2px 4px -1px rgba(19,34,42,.06),0 14px 28px -12px rgba(19,34,42,.16);
+--sh-3:0 0 0 1px rgba(19,34,42,.05),0 4px 8px -2px rgba(19,34,42,.06),0 24px 48px -18px rgba(19,34,42,.20),0 70px 110px -46px var(--g-sh);
+--hl:inset 0 1px 0 rgba(255,255,255,.95);
+--o:linear-gradient(180deg,#FF7D2E,#F25A10);
+--o-sh:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 1px #DE4E08,0 12px 28px -10px rgba(242,90,16,.6)
+}
+body{margin:0;background:var(--bg)}
+*{box-sizing:border-box}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--g-900)}
+.dark a{color:#D7E0E3}
+.dark a:hover{color:#FFFFFF}
+a.btn-o,.dark a.btn-o{color:var(--ink)}
+a.btn-o:hover{filter:brightness(1.06)}
+a:focus-visible,button:focus-visible{outline:2px solid #F25A10;outline-offset:3px}
+button{font:inherit;cursor:pointer}
+.btn-o{display:flex;align-items:center;border-radius:999px;background:var(--o);color:var(--ink);font-weight:600;box-shadow:var(--o-sh)}
+.card{border-radius:32px;background:linear-gradient(180deg,#FFFFFF,#F9FBFB);box-shadow:var(--sh-2),var(--hl);padding:10px;display:flex}
+.tint{border-radius:24px;background:linear-gradient(160deg,var(--g-100),var(--g-50));box-shadow:inset 0 0 0 1px var(--g-line)}
+.h3{margin:0;font-weight:600;font-size:24px;letter-spacing:-0.025em}
+.mut{margin:0;color:var(--mut)}
+.cal{height:16px;border-radius:5px;background:#F1F4F2}
+.pill{padding:3px 9px;border-radius:999px;background:var(--g-100);color:var(--g-900);font-size:12px;font-weight:600}
+.nav-links{display:flex}
+.menu-btn{display:none}
+.comp-wrap{flex:1 1 520px;display:flex;justify-content:center}
+.comp{position:relative;width:580px;height:600px}
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.s4{grid-column:span 4}
+.s2{grid-column:span 2}
+.receipt{clip-path:polygon(0 0,100% 0,100% 97.8%,95% 100%,90% 97.8%,85% 100%,80% 97.8%,75% 100%,70% 97.8%,65% 100%,60% 97.8%,55% 100%,50% 97.8%,45% 100%,40% 97.8%,35% 100%,30% 97.8%,25% 100%,20% 97.8%,15% 100%,10% 97.8%,5% 100%,0 97.8%)}
+.chk{stroke-dasharray:14;stroke-dashoffset:0}
+.tl-head{position:sticky;top:110px}
+[id]{scroll-margin-top:110px}
+.orbit-wrap{flex:1 1 520px;display:flex;justify-content:center}
+.orbit-box{position:relative;width:540px;height:540px;flex:0 0 540px}
+.orb-t{display:flex;align-items:center;justify-content:center;gap:8px;width:160px;height:64px;border-radius:20px;background:linear-gradient(180deg,#FFFFFF,#F8FAF9);box-shadow:var(--sh-2),var(--hl);font-weight:700;font-size:21px;letter-spacing:-0.03em}
+.seam{display:flex}
+.orb-i{position:absolute;left:50%;top:50%;width:0;height:0}
+.orb-i>.orb-t{position:absolute;left:-80px;top:-32px}
+@keyframes orbit-i{from{transform:rotate(0deg) translateX(230px) rotate(0deg)}to{transform:rotate(360deg) translateX(230px) rotate(-360deg)}}
+@media (prefers-reduced-motion:no-preference){
+.a-inv{animation:drop-l 1s cubic-bezier(.2,.8,.2,1) .05s both}
+.a-rec{animation:drop-r 1s cubic-bezier(.2,.8,.2,1) .2s both}
+.a-card{animation:rise .9s cubic-bezier(.2,.8,.2,1) .55s both}
+.a-chip{animation:pop .6s cubic-bezier(.2,.8,.2,1) 1.5s both}
+.a-c1{animation:tick .35s ease-out 1.05s both}
+.a-c2{animation:tick .35s ease-out 1.2s both}
+.a-c3{animation:tick .35s ease-out 1.35s both}
+.orb-i{animation:orbit-i 60s linear infinite}
+}
+@keyframes drop-l{from{opacity:0;transform:translate(-30px,-80px) rotate(-24deg)}to{opacity:1;transform:rotate(-9deg)}}
+@keyframes drop-r{from{opacity:0;transform:translate(40px,-90px) rotate(24deg)}to{opacity:1;transform:rotate(8deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(46px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes tick{from{stroke-dashoffset:14}to{stroke-dashoffset:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes unspin{to{transform:rotate(-360deg)}}
+@supports (animation-timeline: view()){
+@media (prefers-reduced-motion:no-preference) and (min-width:901px){
+.p-up{animation:p-up linear both;animation-timeline:scroll(root);animation-range:0 700px}
+.lift{animation:lift linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+.tl-fill{animation:grow linear both;animation-timeline:view();animation-range:entry 30% exit 60%}
+.node{animation:node linear both;animation-timeline:view();animation-range:entry 60% cover 45%}
+.tl-card{animation:focus linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+}
+@keyframes p-up{to{transform:translateY(-70px)}}
+@keyframes lift{from{transform:translateY(40px) scale(.97)}to{transform:none}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes node{from{background:#FFFFFF;color:var(--g-900)}to{background:var(--g-900);color:#FFFFFF}}
+@keyframes focus{from{opacity:.35;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+.nav-links{display:none}
+.menu-btn{display:flex}
+.comp-wrap{overflow:hidden;height:370px;align-items:flex-start}
+.comp{transform:scale(.6);transform-origin:top center;flex:0 0 580px}
+.bento{grid-template-columns:minmax(0,1fr)}
+.s4,.s2{grid-column:span 1}
+.tl-head{position:static}
+.orbit-wrap{overflow:hidden;height:360px;align-items:flex-start}
+.orbit-box{transform:scale(.64);transform-origin:top center}
+.seam{display:none}
+}
+
+.menu-panel{display:none}
+@media (max-width:900px){
+.menu-panel.open{display:flex}
+}
+.tab{height:44px;padding:0 16px;border:0;border-radius:999px;font-size:15px;font-weight:600;background:transparent;color:#D7E0E3;box-shadow:none;transition:background .15s,color .15s}
+.tab[aria-pressed="true"]{background:#FFFFFF;color:#13222A;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
+@media (max-width:480px){.tab{padding:0 11px;font-size:14px;height:40px}}
+
+</style>
+</head>
+<body>
+<div style="width: 100%; min-height: 100%; background: var(--bg); color: var(--ink); font-family: 'Schibsted Grotesk', system-ui, sans-serif; font-size: 17px; line-height: 1.55; overflow-x: clip">
+
+<header style="max-width: 1320px; margin: 0 auto; padding: 26px clamp(20px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="/" aria-label="Helbo Regnskab, til forsiden" style="display: flex; align-items: center; gap: 10px">
+<svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 6H38L52 20V54A4 4 0 0 1 48 58H16A4 4 0 0 1 12 54V10A4 4 0 0 1 16 6Z" style="fill: var(--g-900)"></path><path d="M38 6V16A4 4 0 0 0 42 20H52Z" style="fill: var(--g-soft)"></path><path d="M21 37L29 45L43 29" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: Outfit, sans-serif; font-size: 28px; letter-spacing: -0.045em; line-height: 1; white-space: nowrap"><span style="font-weight: 600">helbo</span> <span style="font-weight: 300; color: var(--g-900)">regnskab</span></span>
+</a>
+<nav class="nav-links" aria-label="Hovedmenu" style="align-items: center; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(255,255,255,0.7); box-shadow: var(--sh-1), var(--hl); font-size: 15px">
+<a href="#saadan" style="display: flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; color: #3C4A52">Sådan foregår det</a>
+<a href="#priser" style="display: flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; color: #3C4A52">Priser</a>
+<a href="/kontakt.html" class="btn-o" style="height: 40px; padding: 0 20px">Book en snak</a>
+</nav>
+<button type="button" class="menu-btn" aria-label="Åbn menu" aria-expanded="false" aria-controls="mobilmenu" style="width: 46px; height: 46px; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: #FFFFFF; color: var(--ink); box-shadow: var(--sh-1)"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h10M3 10h10"></path></svg></button>
+</header>
+<nav id="mobilmenu" class="menu-panel" aria-label="Mobilmenu" style="max-width: 1320px; margin: -8px clamp(20px, 4vw, 56px) 16px; padding: 8px; border-radius: 24px; background: #FFFFFF; box-shadow: var(--sh-2), var(--hl); flex-direction: column; gap: 2px; font-size: 17px">
+<a href="#saadan" style="padding: 14px 16px; border-radius: 16px">Sådan foregår det</a>
+<a href="#priser" style="padding: 14px 16px; border-radius: 16px">Priser</a>
+<a href="/kontakt.html" class="btn-o" style="justify-content: center; height: 52px; margin-top: 6px">Book et gratis møde</a>
+</nav>
+
+<section id="top" style="position: relative; max-width: 1320px; margin: 0 auto; padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) clamp(80px, 9vw, 140px); display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+<div style="position: absolute; right: 2%; top: 4%; width: 680px; height: 680px; border-radius: 999px; background: radial-gradient(closest-side, rgba(255,255,255,0.95), rgba(255,255,255,0))" aria-hidden="true"></div>
+<div style="position: relative; flex: 1 1 480px; display: flex; flex-direction: column; gap: 32px; max-width: 600px">
+<h1 style="margin: 0; font-weight: 600; font-size: clamp(46px, 5.6vw, 82px); line-height: 0.98; letter-spacing: -0.048em; text-wrap: balance">Fra en skuffe med bilag til tal, du kan stå inde for.</h1>
+<p style="margin: 0; max-width: 430px; font-size: 19px; color: var(--mut); text-wrap: pretty">Din faste bogholder til bogføring, moms og løn.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px">
+<a href="/kontakt.html" class="btn-o" style="gap: 12px; height: 58px; padding: 0 10px 0 28px; font-size: 17px">Book en uforpligtende snak<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: rgba(19,34,42,0.12)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"></path></svg></span></a>
+<span style="display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--mut)">
+<span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; box-shadow: var(--sh-1)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)" aria-hidden="true"><path d="M3.5 8.3l2.8 2.8 6-6.2"></path></svg></span>Godkendt partner hos <svg role="img" aria-label="Dinero" width="67.4" height="17" viewBox="0 0 1054 266" style="display: block; flex: 0 0 auto"><path fill="#035EFC" d="M62.7,145.9l55-95.1,24.4,14.1-54.9,94.9c-4.1,7.1-2.4,14.8,5.2,19.2,7.5,4.3,15.1,2,19.4-5.4l47.1-81.5c11.8-20.4,6.7-46-15-58.5-23-13.3-47.2-2.4-57.2,14.8l-46.9,81c-23.4,40.4-4.7,81.5,24.4,98.3,24.7,14.2,73.3,13.7,97.1-27.3,0,0,53.2-91.9,54-93.3l24.4,14-55.2,95.3c-31.1,53.8-92.3,59.9-134.4,35.6C7,227.2-17,171.3,14.1,117.6L62.3,34.4C83.1-1.6,128.1-8.1,158.1,9.1c29.9,17.2,46.9,59.5,25.9,95.9l-48.2,83.2c-10.9,18.8-36.7,27-57.5,15-20.5-11.8-28.1-35.7-15.6-57.4h0Z"></path><path fill="#035EFC" d="M980.7,237.3c-14,0-26.6-3.2-37.7-9.5-10.9-6.5-19.6-15.4-26-26.5-6.4-11.3-9.6-24.1-9.6-38.5s3.2-27.1,9.6-38.2c6.4-11.3,15-20.1,26-26.5,11.1-6.5,23.7-9.8,37.7-9.8s26.2,3.3,37.2,9.8c11.1,6.4,19.9,15.2,26.2,26.5,6.4,11.1,9.6,23.8,9.6,38.2s-3.2,27.2-9.6,38.5c-6.4,11.1-15.1,19.9-26.2,26.5-10.9,6.4-23.3,9.5-37.2,9.5ZM980.7,211.7c8.6,0,16.2-2.1,23-6.3,6.7-4.4,12-10.2,15.8-17.5,3.8-7.5,5.6-15.8,5.5-25.1.2-9.5-1.6-17.8-5.5-25.1-3.8-7.5-9.1-13.3-15.8-17.5-6.7-4.2-14.4-6.3-23-6.3s-16.3,2.2-23.2,6.5c-6.7,4.2-12,10-15.8,17.5-3.8,7.3-5.7,15.5-5.5,24.8-.2,9.3,1.6,17.6,5.5,25.1,3.8,7.3,9.1,13.1,15.8,17.5,6.9,4.2,14.7,6.3,23.2,6.3Z"></path><path fill="#035EFC" d="M906.9,91.1l-7.4,30.5c-2.2-.9-4.6-1.6-7.4-2.2-2.5-.7-5.1-1.1-7.7-1.1-4.9,0-9.7,1-14.2,3-4.4,1.8-8.3,4.5-11.8,7.9-3.3,3.3-5.9,7.2-7.9,11.7-2,4.4-3,9.2-3,14.5v79.1h-28.4V91.4h28.4v26.8c1.9-4.1,4.4-7.9,7.4-11.5,4.9-5.6,10.5-10.1,16.7-13.4,6.4-3.3,12.9-4.9,19.7-4.9s6,.3,8.7.8c2.9.5,5.2,1.2,6.8,1.9Z"></path><path fill="#035EFC" d="M789.3,130.1c-3.1-8.5-7.6-15.9-13.7-22.1-5.8-6.2-12.8-11-20.8-14.5-8-3.6-16.7-5.5-26-5.5s-20.4,1.9-29.5,5.7c-8.9,3.6-16.7,8.9-23.2,15.8-6.4,6.7-11.4,14.7-15,24-3.6,9.3-5.5,19.6-5.5,30.8s3.2,26.7,9.6,37.6c6.6,10.9,15.5,19.6,26.8,25.9,11.5,6.2,24.6,9.3,39.4,9.3s13.6-.9,20.5-2.7c7.1-2,13.8-4.6,20-7.9,6.4-3.3,11.8-7.1,16.1-11.5l-14.2-19.9c-7.1,6.2-13.8,10.5-20,12.8-6,2.4-12.6,3.5-19.7,3.5s-18.9-2-26.5-6c-7.7-4-13.6-9.6-17.8-16.9-3.2-5.6-5.1-12-5.9-19.1h109.8l.3-12c.2-10-1.4-19.2-4.6-27.6ZM688.7,136.1c3.5-7.3,8.6-12.7,15.3-16.4,6.7-3.8,15-5.7,24.9-5.7s11.9,1.4,17.2,4.1c5.3,2.7,9.7,6.5,13.1,11.2,3.5,4.7,5.5,10.1,6,16.1v1.9h-80.3c.9-4.1,2.1-7.8,3.7-11.2Z"></path><path fill="#035EFC" d="M634.6,147.3v87.3h-28.2v-85.4c0-8.2-1.1-14.9-3.3-20.2-2.2-5.5-5.6-9.4-10.1-11.7-4.6-2.5-10.2-3.6-16.9-3.3-5.5,0-10.5.9-15,2.7-4.6,1.6-8.6,4-12,7.1-3.3,3.1-5.9,6.7-7.9,10.9-1.8,4-2.7,8.4-2.7,13.1v86.7h-28.2V91.4h28.2v22.2c1.6-2.4,3.5-4.7,5.7-6.9,5.3-5.5,11.6-9.8,18.9-13.1,7.3-3.5,14.8-5.2,22.4-5.2,10.9,0,20,2.2,27.3,6.5,7.3,4.2,12.8,10.6,16.4,19.4,3.6,8.7,5.5,19.7,5.5,33Z"></path><path fill="#035EFC" d="M456.1,234.6V91.4h28.2v143.2h-28.2Z"></path><path fill="#035EFC" d="M401.6,32.7v76.4c-2.4-2.8-5.3-5.5-8.7-8-5.3-4-11.3-7.1-18-9.3-6.6-2.4-13.4-3.5-20.5-3.5-12.9,0-24.5,3.3-34.7,9.8-10.2,6.4-18.3,15.2-24.3,26.5-5.8,11.1-8.7,23.8-8.7,38.2s3,27.2,9,38.5c6,11.1,14.1,19.9,24.3,26.5,10.4,6.4,22.1,9.5,35.3,9.5s12.9-1.1,19.1-3.3c6.4-2.2,11.9-5.1,16.7-8.7,4.3-3.2,7.9-6.6,10.7-10.2v19.5h28.2V32.7h-28.2ZM397,188.7c-3.6,7.5-8.7,13.4-15.3,17.7-6.6,4.4-14.1,6.5-22.7,6.5s-16.1-2.2-22.7-6.5c-6.6-4.4-11.8-10.3-15.6-17.7-3.6-7.6-5.5-16.3-5.5-25.9s1.8-18.2,5.5-25.6c3.8-7.6,9-13.6,15.6-18,6.6-4.4,14.1-6.5,22.7-6.5s16.1,2.2,22.7,6.5c6.6,4.4,11.7,10.4,15.3,18,3.8,7.5,5.7,16,5.7,25.6s-1.9,18.3-5.7,25.9Z"></path><path fill="#035EFC" d="M469.8,64.2c-3.3,0-6.3-.8-9-2.3-2.6-1.6-4.7-3.7-6.2-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.4,2.3-9.1c1.5-2.7,3.6-4.8,6.2-6.3,2.6-1.6,5.6-2.3,9-2.3s6.2.8,8.8,2.3c2.6,1.5,4.7,3.6,6.2,6.3,1.5,2.6,2.3,5.7,2.3,9.1s-.8,6.5-2.3,9.2c-1.5,2.6-3.6,4.7-6.2,6.3-2.6,1.5-5.6,2.3-8.8,2.3Z"></path></svg></span>
+</div>
+</div>
+<div class="comp-wrap" aria-hidden="true">
+<div class="comp p-up">
+<div style="position: absolute; left: 70px; top: 520px; width: 440px; height: 50px; border-radius: 999px; background: radial-gradient(closest-side, rgba(19,34,42,0.22), rgba(19,34,42,0)); filter: blur(10px)"></div>
+<div class="a-inv" style="position: absolute; left: 14px; top: 44px; width: 310px; height: 404px; border-radius: 8px; background: linear-gradient(180deg, #FFFFFF, #FAFBFB); transform: rotate(-9deg); box-shadow: var(--sh-2), var(--hl); padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; font-size: 11.5px; color: #55636B">
+<div style="display: flex; justify-content: space-between; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em; color: var(--ink)">Faktura</span><span>Nr. 2026-118</span></div>
+<span style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--g-100), var(--g-soft))"></span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; margin-top: 6px"><span>Til</span><span style="color: var(--ink); font-weight: 500">Kunde ApS</span></div>
+<div style="height: 1px; background: #E6EAEB; margin: 8px 0 2px"></div>
+<div style="display: flex; justify-content: space-between"><span>Konsulentbistand</span><span style="color: var(--ink)">7.500,00</span></div>
+<div style="display: flex; justify-content: space-between"><span>Moms 25 %</span><span style="color: var(--ink)">1.875,00</span></div>
+<div style="height: 1px; background: #E6EAEB; margin: 4px 0"></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--ink)"><span>I alt</span><span>9.375,00</span></div>
+</div>
+<div class="a-rec" style="position: absolute; left: 306px; top: 0px; width: 206px; height: 390px; transform: rotate(8deg); filter: drop-shadow(0 2px 2px rgba(19,34,42,.06)) drop-shadow(0 24px 26px rgba(19,34,42,.18))">
+<div class="receipt" style="width: 206px; height: 390px; background: linear-gradient(180deg, #FDFDFA, #F6F6F0); padding: 26px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; color: #5E6A70">
+<span style="font-weight: 700; font-size: 14px; letter-spacing: 0.02em; color: var(--ink)">Café Nord</span>
+<span>Aarhus C</span>
+<span style="width: 100%; border-top: 1px dashed #D3D9DA; margin: 10px 0 6px"></span>
+<div style="width: 100%; display: flex; justify-content: space-between"><span>Frokost 2 pers.</span><span>356,00</span></div>
+<div style="width: 100%; display: flex; justify-content: space-between"><span>Kaffe 2 x 15,00</span><span>30,00</span></div>
+<span style="width: 100%; border-top: 1px dashed #D3D9DA; margin: 6px 0"></span>
+<div style="width: 100%; display: flex; justify-content: space-between; color: var(--ink); font-weight: 700; font-size: 13px"><span>I alt</span><span>386,00</span></div>
+<div style="width: 100%; display: flex; justify-content: space-between"><span>Heraf moms</span><span>77,20</span></div>
+</div>
+</div>
+<div class="a-card" style="position: absolute; left: 104px; top: 272px; width: 440px; border-radius: 26px; background: linear-gradient(180deg, #FFFFFF, #FBFCFC); box-shadow: var(--sh-3), var(--hl); padding: 8px">
+<div style="border-radius: 20px; background: linear-gradient(180deg, var(--g-50), #FFFFFF); box-shadow: inset 0 0 0 1px var(--g-line); padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #5B6970">Måned</span><span style="font-weight: 600; font-size: 26px; letter-spacing: -0.03em; line-height: 1.1">Oktober</span></div>
+<span style="display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; border-radius: 999px; background: #FFFFFF; color: var(--g-900); font-size: 14px; font-weight: 600; box-shadow: var(--sh-1)"><span style="width: 8px; height: 8px; border-radius: 999px; background: var(--g-500)"></span>Afstemt</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 16px">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: #FFFFFF; box-shadow: var(--sh-1)"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path class="chk a-c1" d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>Alle bilag bogført</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: #FFFFFF; box-shadow: var(--sh-1)"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path class="chk a-c2" d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>Bank afstemt</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: #FFFFFF; box-shadow: var(--sh-1)"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path class="chk a-c3" d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>Moms klar til indberetning</div>
+</div>
+</div>
+</div>
+<div class="a-chip" style="position: absolute; left: 430px; top: 118px; display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 18px 0 8px; border-radius: 999px; background: linear-gradient(180deg, #24363F, #13222A); color: #FFFFFF; font-size: 14px; font-weight: 500; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 18px 36px -14px rgba(19,34,42,.6)">
+<span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: linear-gradient(180deg, var(--g-400), var(--g-700)); box-shadow: inset 0 1px 0 rgba(255,255,255,.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5V5M7.5 9.5L12 5l4.5 4.5"></path><path d="M5 15v2.5A1.5 1.5 0 006.5 19h11a1.5 1.5 0 001.5-1.5V15"></path></svg></span>
+Bilag modtaget
+</div>
+</div>
+</div>
+</section>
+
+<section id="fordele" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px)">
+<h2 style="margin: 0 0 clamp(40px, 5vw, 64px); max-width: 640px; font-weight: 600; font-size: clamp(36px, 4vw, 58px); line-height: 1.0; letter-spacing: -0.045em; text-wrap: balance">Du driver forretningen. Jeg holder styr på tallene.</h2>
+<div class="bento">
+<div class="card s4 lift" style="flex-direction: column">
+<div class="tint" style="padding: 32px clamp(20px, 3vw, 40px); display: flex; flex-direction: column; gap: 12px; min-height: 250px; justify-content: center">
+<div style="display: flex; align-items: flex-end; gap: 10px">
+<span style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(180deg, var(--g-700), var(--g-900)); box-shadow: 0 6px 12px -6px var(--g-sh)"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 6H38L52 20V54A4 4 0 0 1 48 58H16A4 4 0 0 1 12 54V10A4 4 0 0 1 16 6Z" fill="#FFFFFF"></path><path d="M38 6V16A4 4 0 0 0 42 20H52Z" style="fill: var(--g-300)"></path><path d="M21 37L29 45L43 29" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--g-900)"></path></svg></span>
+<span style="max-width: 360px; padding: 14px 18px; border-radius: 20px 20px 20px 6px; background: #FFFFFF; box-shadow: var(--sh-2), var(--hl); font-size: 16px">Oktober er afstemt, og momsen er klar. Du skal bare godkende.</span>
+</div>
+<span style="align-self: flex-end; padding: 12px 18px; border-radius: 20px 20px 6px 20px; background: linear-gradient(180deg, var(--g-700), var(--g-900)); color: #FFFFFF; font-size: 16px; box-shadow: 0 12px 24px -12px var(--g-sh)">Perfekt, tak.</span>
+</div>
+<div style="padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 6px"><h3 class="h3">Én fast bogholder</h3><p class="mut">Den samme person hver gang, som kender dit selskab.</p></div>
+</div>
+<div class="card s2 lift" style="flex-direction: column">
+<div class="tint" style="min-height: 250px; display: flex; align-items: center; justify-content: center">
+<div style="position: relative; width: 150px; height: 112px; border-radius: 16px 34px 34px 16px; background: linear-gradient(160deg, #FFFFFF, var(--g-100)); box-shadow: var(--sh-3), var(--hl); transform: rotate(-8deg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 24px; letter-spacing: -0.03em; color: var(--g-900)">
+<span style="position: absolute; right: 20px; top: 50%; margin-top: -8px; width: 16px; height: 16px; border-radius: 999px; background: var(--bg); box-shadow: inset 0 1px 2px rgba(19,34,42,.2)"></span>
+<span style="margin-right: 26px">Fast</span>
+</div>
+</div>
+<div style="padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 6px"><h3 class="h3">Fast pris</h3><p class="mut">Du kender prisen på forhånd. Ingen timer, der tikker.</p></div>
+</div>
+<div class="card s2 lift" style="flex-direction: column">
+<div class="tint" style="min-height: 250px; display: flex; align-items: center; justify-content: center">
+<div style="width: 190px; border-radius: 20px; background: #FFFFFF; box-shadow: var(--sh-3), var(--hl); overflow: hidden">
+<div style="height: 40px; background: linear-gradient(180deg, var(--g-700), var(--g-900)); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">December</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; padding: 14px">
+<span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span>
+<span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span>
+<span class="cal"></span><span class="cal"></span><span style="display: flex; align-items: center; justify-content: center; height: 16px; border-radius: 5px; background: var(--g-500)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3l2.3 2.3 4.7-4.9"></path></svg></span><span class="cal"></span><span class="cal"></span><span class="cal"></span><span class="cal"></span>
+</div>
+</div>
+</div>
+<div style="padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 6px"><h3 class="h3">Altid til tiden</h3><p class="mut">Moms, løn og årsafslutning klar før fristen.</p></div>
+</div>
+<div class="card s4 lift" style="flex-direction: column">
+<div class="tint" style="position: relative; overflow: hidden; min-height: 250px; padding: 32px clamp(20px, 3vw, 40px) 0; display: flex; align-items: flex-end; justify-content: center">
+<div style="width: 100%; max-width: 520px; border-radius: 18px 18px 0 0; background: #FFFFFF; box-shadow: var(--sh-3), var(--hl); padding: 8px 8px 0">
+<div style="display: flex; gap: 6px; padding: 8px 10px 12px"><span style="width: 9px; height: 9px; border-radius: 999px; background: #E2E7E8"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E2E7E8"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E2E7E8"></span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 12px; background: var(--g-50); font-size: 15px"><span style="flex: 1">Café Nord</span><span style="color: #5B6970">Repræsentation</span><span style="font-variant-numeric: tabular-nums">386,00</span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; font-size: 15px"><span style="flex: 1">Faktura 2026-118</span><span style="color: #5B6970">Salg</span><span style="font-variant-numeric: tabular-nums">9.375,00</span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+</div>
+</div>
+<div style="padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 6px"><h3 class="h3">Bogført i dit eget system</h3><p class="mut">Du har altid adgang til dine tal.</p></div>
+</div>
+</div>
+</section>
+
+<section id="saadan" style="max-width: 1320px; margin: 0 auto; padding: clamp(100px, 11vw, 160px) clamp(20px, 4vw, 56px) clamp(60px, 6vw, 100px); display: flex; flex-wrap: wrap; align-items: flex-start; gap: clamp(40px, 6vw, 96px)">
+<div class="tl-head" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; max-width: 460px; font-weight: 600; font-size: clamp(36px, 4vw, 58px); line-height: 1.0; letter-spacing: -0.045em; text-wrap: balance">Sådan bliver et bilag til overblik.</h2>
+<p style="margin: 0; max-width: 380px; font-size: 19px; color: var(--mut)">Fire trin, hver måned. Du står kun for det første.</p>
+</div>
+<div style="flex: 1.4 1 560px; position: relative; display: flex; flex-direction: column; gap: 28px; padding-left: 64px">
+<div style="position: absolute; left: 19px; top: 30px; bottom: 30px; width: 3px; border-radius: 999px; background: #DCE3DF" aria-hidden="true"><div class="tl-fill" style="width: 100%; height: 100%; border-radius: 999px; background: linear-gradient(180deg, var(--g-500), var(--g-900)); transform-origin: top"></div></div>
+
+<div style="position: relative">
+<span class="node" style="position: absolute; left: -64px; top: 24px; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; background: var(--g-900); color: #FFFFFF; font-weight: 600; font-size: 15px; box-shadow: 0 0 0 6px var(--bg), var(--sh-2)">1</span>
+<div class="card tl-card" style="flex-wrap: wrap; gap: 10px">
+<div class="tint" style="position: relative; flex: 1 1 260px; min-height: 260px; overflow: hidden" aria-hidden="true">
+<div style="position: absolute; left: 50%; top: 36px; margin-left: -110px; width: 150px; height: 190px; border-radius: 6px; background: #FFFFFF; transform: rotate(-10deg); box-shadow: var(--sh-2)"></div>
+<div style="position: absolute; left: 50%; top: 26px; margin-left: -60px; width: 140px; height: 200px; border-radius: 6px; background: linear-gradient(180deg, #FDFDFA, #F1F2EC); transform: rotate(6deg); box-shadow: var(--sh-2); padding: 18px 16px; display: flex; flex-direction: column; gap: 7px"><span style="height: 5px; width: 60%; border-radius: 3px; background: #CDD5D7"></span><span style="height: 5px; width: 40%; border-radius: 3px; background: #CDD5D7"></span><span style="height: 5px; width: 90%; border-radius: 3px; background: #E1E6E7; margin-top: 10px"></span><span style="height: 5px; width: 90%; border-radius: 3px; background: #E1E6E7"></span><span style="height: 6px; width: 40%; border-radius: 3px; background: var(--ink); align-self: flex-end; margin-top: 12px"></span></div>
+<div style="position: absolute; left: 50%; top: 180px; margin-left: -20px; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px 0 7px; border-radius: 999px; background: linear-gradient(180deg, #24363F, #13222A); color: #FFFFFF; font-size: 13px; font-weight: 500; box-shadow: 0 16px 30px -12px rgba(19,34,42,.6)"><span style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: var(--g-500)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5V5M7.5 9.5L12 5l4.5 4.5"></path></svg></span>3 nye bilag</div>
+</div>
+<div style="flex: 1 1 220px; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><h3 class="h3" style="font-size: 26px">Bilagene kommer ind</h3><p class="mut">Et billede eller en mail, når det passer dig.</p></div>
+</div>
+</div>
+
+<div style="position: relative">
+<span class="node" style="position: absolute; left: -64px; top: 24px; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; background: var(--g-900); color: #FFFFFF; font-weight: 600; font-size: 15px; box-shadow: 0 0 0 6px var(--bg), var(--sh-2)">2</span>
+<div class="card tl-card" style="flex-wrap: wrap; gap: 10px">
+<div class="tint" style="flex: 1 1 260px; min-height: 260px; display: flex; align-items: center; justify-content: center; padding: 20px" aria-hidden="true">
+<div style="width: 100%; max-width: 320px; border-radius: 18px; background: #FFFFFF; box-shadow: var(--sh-3), var(--hl); padding: 6px; display: flex; flex-direction: column; font-size: 14px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: var(--g-50)"><span style="flex: 1">Café Nord</span><span class="pill">Repræsentation</span></div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 12px"><span style="flex: 1">Kunde ApS</span><span class="pill">Salg</span></div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 12px"><span style="flex: 1">Byggemarked</span><span class="pill">Materialer</span></div>
+</div>
+</div>
+<div style="flex: 1 1 220px; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><h3 class="h3" style="font-size: 26px">Alt bliver bogført</h3><p class="mut">Hvert bilag får den rigtige konto.</p></div>
+</div>
+</div>
+
+<div style="position: relative">
+<span class="node" style="position: absolute; left: -64px; top: 24px; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; background: var(--g-900); color: #FFFFFF; font-weight: 600; font-size: 15px; box-shadow: 0 0 0 6px var(--bg), var(--sh-2)">3</span>
+<div class="card tl-card" style="flex-wrap: wrap; gap: 10px">
+<div class="tint" style="flex: 1 1 260px; min-height: 260px; display: flex; align-items: center; justify-content: center; padding: 20px" aria-hidden="true">
+<div style="flex: 0 1 130px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-2), var(--hl); padding: 16px; display: flex; flex-direction: column; gap: 6px; font-size: 13px"><span style="color: #5B6970; font-size: 12px">Banken</span><span style="font-weight: 600">-386,00</span></div>
+<div style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin: 0 -8px; position: relative; z-index: 1; border-radius: 999px; background: linear-gradient(180deg, var(--g-700), var(--g-900)); box-shadow: 0 0 0 6px var(--g-50), 0 10px 20px -8px var(--g-sh)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"></path></svg></div>
+<div style="flex: 0 1 130px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-2), var(--hl); padding: 16px; display: flex; flex-direction: column; gap: 6px; font-size: 13px"><span style="color: #5B6970; font-size: 12px">Bogført</span><span style="font-weight: 600">-386,00</span></div>
+</div>
+<div style="flex: 1 1 220px; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><h3 class="h3" style="font-size: 26px">Banken går op</h3><p class="mut">Hver post i banken matcher bogføringen.</p></div>
+</div>
+</div>
+
+<div style="position: relative">
+<span class="node" style="position: absolute; left: -64px; top: 24px; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; background: var(--g-900); color: #FFFFFF; font-weight: 600; font-size: 15px; box-shadow: 0 0 0 6px var(--bg), var(--sh-2)">4</span>
+<div class="card tl-card" style="flex-wrap: wrap; gap: 10px">
+<div style="flex: 1 1 260px; min-height: 260px; border-radius: 24px; background: linear-gradient(160deg, var(--g-700), var(--g-950)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 30px; color: #FFFFFF" aria-hidden="true">
+<span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 999px; background: rgba(255,255,255,.14); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12.5l3.5 3.5 7.5-7.8"></path></svg></span>
+<span style="font-weight: 600; font-size: 28px; letter-spacing: -0.03em; line-height: 1.1">Oktober er lukket</span>
+<span style="color: var(--g-soft)">Momsen er klar til indberetning</span>
+</div>
+<div style="flex: 1 1 220px; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><h3 class="h3" style="font-size: 26px">Måneden er lukket</h3><p class="mut">Måneden er lukket, og du ved, hvor du står.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="systemer" style="max-width: 1320px; margin: 0 auto; padding: clamp(80px, 9vw, 140px) clamp(20px, 4vw, 56px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(40px, 6vw, 80px)">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 20px; max-width: 520px">
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(36px, 4vw, 58px); line-height: 1.0; letter-spacing: -0.045em; text-wrap: balance">Regnskabsprogrammer jeg understøtter</h2>
+<p style="margin: 0; font-size: 19px; color: var(--mut)">Jeg arbejder i det system, du allerede bruger. Står du og skal vælge, hjælper jeg dig med det.</p>
+<ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px">
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-100)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)"></path></svg>Opsætning og bankkobling</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-100)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)"></path></svg>Skift fra ét system til et andet</li>
+</ul>
+</div>
+<div class="orbit-wrap" aria-hidden="true">
+<div class="orbit-box">
+<div style="position: absolute; inset: 40px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--g-line), inset 0 0 0 2px rgba(255,255,255,.4)"></div>
+<div style="position: absolute; inset: 130px; border-radius: 999px; background: radial-gradient(closest-side, rgba(255,255,255,1), rgba(255,255,255,0)); box-shadow: inset 0 0 0 1px var(--g-line)"></div>
+<div style="position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 34px; background: linear-gradient(180deg, var(--g-700), var(--g-950)); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 60px -20px var(--g-sh)" role="img" aria-label="Helbo Regnskab"><svg width="66" height="66" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 6H38L52 20V54A4 4 0 0 1 48 58H16A4 4 0 0 1 12 54V10A4 4 0 0 1 16 6Z" fill="#FFFFFF"></path><path d="M38 6V16A4 4 0 0 0 42 20H52Z" style="fill: var(--g-300)"></path><path d="M22 37L29 44L42 29" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--g-900)"></path></svg></div>
+<div class="orbit" style="position: absolute; inset: 0">
+<div class="orb-i" style="transform: rotate(270deg) translateX(230px) rotate(-270deg); animation-delay: -45s"><span class="orb-t"><svg role="img" aria-label="Dinero" width="103.0" height="26" viewBox="0 0 1054 266" style="display: block; flex: 0 0 auto"><path fill="#035EFC" d="M62.7,145.9l55-95.1,24.4,14.1-54.9,94.9c-4.1,7.1-2.4,14.8,5.2,19.2,7.5,4.3,15.1,2,19.4-5.4l47.1-81.5c11.8-20.4,6.7-46-15-58.5-23-13.3-47.2-2.4-57.2,14.8l-46.9,81c-23.4,40.4-4.7,81.5,24.4,98.3,24.7,14.2,73.3,13.7,97.1-27.3,0,0,53.2-91.9,54-93.3l24.4,14-55.2,95.3c-31.1,53.8-92.3,59.9-134.4,35.6C7,227.2-17,171.3,14.1,117.6L62.3,34.4C83.1-1.6,128.1-8.1,158.1,9.1c29.9,17.2,46.9,59.5,25.9,95.9l-48.2,83.2c-10.9,18.8-36.7,27-57.5,15-20.5-11.8-28.1-35.7-15.6-57.4h0Z"></path><path fill="#035EFC" d="M980.7,237.3c-14,0-26.6-3.2-37.7-9.5-10.9-6.5-19.6-15.4-26-26.5-6.4-11.3-9.6-24.1-9.6-38.5s3.2-27.1,9.6-38.2c6.4-11.3,15-20.1,26-26.5,11.1-6.5,23.7-9.8,37.7-9.8s26.2,3.3,37.2,9.8c11.1,6.4,19.9,15.2,26.2,26.5,6.4,11.1,9.6,23.8,9.6,38.2s-3.2,27.2-9.6,38.5c-6.4,11.1-15.1,19.9-26.2,26.5-10.9,6.4-23.3,9.5-37.2,9.5ZM980.7,211.7c8.6,0,16.2-2.1,23-6.3,6.7-4.4,12-10.2,15.8-17.5,3.8-7.5,5.6-15.8,5.5-25.1.2-9.5-1.6-17.8-5.5-25.1-3.8-7.5-9.1-13.3-15.8-17.5-6.7-4.2-14.4-6.3-23-6.3s-16.3,2.2-23.2,6.5c-6.7,4.2-12,10-15.8,17.5-3.8,7.3-5.7,15.5-5.5,24.8-.2,9.3,1.6,17.6,5.5,25.1,3.8,7.3,9.1,13.1,15.8,17.5,6.9,4.2,14.7,6.3,23.2,6.3Z"></path><path fill="#035EFC" d="M906.9,91.1l-7.4,30.5c-2.2-.9-4.6-1.6-7.4-2.2-2.5-.7-5.1-1.1-7.7-1.1-4.9,0-9.7,1-14.2,3-4.4,1.8-8.3,4.5-11.8,7.9-3.3,3.3-5.9,7.2-7.9,11.7-2,4.4-3,9.2-3,14.5v79.1h-28.4V91.4h28.4v26.8c1.9-4.1,4.4-7.9,7.4-11.5,4.9-5.6,10.5-10.1,16.7-13.4,6.4-3.3,12.9-4.9,19.7-4.9s6,.3,8.7.8c2.9.5,5.2,1.2,6.8,1.9Z"></path><path fill="#035EFC" d="M789.3,130.1c-3.1-8.5-7.6-15.9-13.7-22.1-5.8-6.2-12.8-11-20.8-14.5-8-3.6-16.7-5.5-26-5.5s-20.4,1.9-29.5,5.7c-8.9,3.6-16.7,8.9-23.2,15.8-6.4,6.7-11.4,14.7-15,24-3.6,9.3-5.5,19.6-5.5,30.8s3.2,26.7,9.6,37.6c6.6,10.9,15.5,19.6,26.8,25.9,11.5,6.2,24.6,9.3,39.4,9.3s13.6-.9,20.5-2.7c7.1-2,13.8-4.6,20-7.9,6.4-3.3,11.8-7.1,16.1-11.5l-14.2-19.9c-7.1,6.2-13.8,10.5-20,12.8-6,2.4-12.6,3.5-19.7,3.5s-18.9-2-26.5-6c-7.7-4-13.6-9.6-17.8-16.9-3.2-5.6-5.1-12-5.9-19.1h109.8l.3-12c.2-10-1.4-19.2-4.6-27.6ZM688.7,136.1c3.5-7.3,8.6-12.7,15.3-16.4,6.7-3.8,15-5.7,24.9-5.7s11.9,1.4,17.2,4.1c5.3,2.7,9.7,6.5,13.1,11.2,3.5,4.7,5.5,10.1,6,16.1v1.9h-80.3c.9-4.1,2.1-7.8,3.7-11.2Z"></path><path fill="#035EFC" d="M634.6,147.3v87.3h-28.2v-85.4c0-8.2-1.1-14.9-3.3-20.2-2.2-5.5-5.6-9.4-10.1-11.7-4.6-2.5-10.2-3.6-16.9-3.3-5.5,0-10.5.9-15,2.7-4.6,1.6-8.6,4-12,7.1-3.3,3.1-5.9,6.7-7.9,10.9-1.8,4-2.7,8.4-2.7,13.1v86.7h-28.2V91.4h28.2v22.2c1.6-2.4,3.5-4.7,5.7-6.9,5.3-5.5,11.6-9.8,18.9-13.1,7.3-3.5,14.8-5.2,22.4-5.2,10.9,0,20,2.2,27.3,6.5,7.3,4.2,12.8,10.6,16.4,19.4,3.6,8.7,5.5,19.7,5.5,33Z"></path><path fill="#035EFC" d="M456.1,234.6V91.4h28.2v143.2h-28.2Z"></path><path fill="#035EFC" d="M401.6,32.7v76.4c-2.4-2.8-5.3-5.5-8.7-8-5.3-4-11.3-7.1-18-9.3-6.6-2.4-13.4-3.5-20.5-3.5-12.9,0-24.5,3.3-34.7,9.8-10.2,6.4-18.3,15.2-24.3,26.5-5.8,11.1-8.7,23.8-8.7,38.2s3,27.2,9,38.5c6,11.1,14.1,19.9,24.3,26.5,10.4,6.4,22.1,9.5,35.3,9.5s12.9-1.1,19.1-3.3c6.4-2.2,11.9-5.1,16.7-8.7,4.3-3.2,7.9-6.6,10.7-10.2v19.5h28.2V32.7h-28.2ZM397,188.7c-3.6,7.5-8.7,13.4-15.3,17.7-6.6,4.4-14.1,6.5-22.7,6.5s-16.1-2.2-22.7-6.5c-6.6-4.4-11.8-10.3-15.6-17.7-3.6-7.6-5.5-16.3-5.5-25.9s1.8-18.2,5.5-25.6c3.8-7.6,9-13.6,15.6-18,6.6-4.4,14.1-6.5,22.7-6.5s16.1,2.2,22.7,6.5c6.6,4.4,11.7,10.4,15.3,18,3.8,7.5,5.7,16,5.7,25.6s-1.9,18.3-5.7,25.9Z"></path><path fill="#035EFC" d="M469.8,64.2c-3.3,0-6.3-.8-9-2.3-2.6-1.6-4.7-3.7-6.2-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.4,2.3-9.1c1.5-2.7,3.6-4.8,6.2-6.3,2.6-1.6,5.6-2.3,9-2.3s6.2.8,8.8,2.3c2.6,1.5,4.7,3.6,6.2,6.3,1.5,2.6,2.3,5.7,2.3,9.1s-.8,6.5-2.3,9.2c-1.5,2.6-3.6,4.7-6.2,6.3-2.6,1.5-5.6,2.3-8.8,2.3Z"></path></svg></span></div>
+<div class="orb-i" style="transform: rotate(0deg) translateX(230px) rotate(0deg); animation-delay: 0s"><span class="orb-t">Billy</span></div>
+<div class="orb-i" style="transform: rotate(90deg) translateX(230px) rotate(-90deg); animation-delay: -15s"><span class="orb-t">e-conomic</span></div>
+<div class="orb-i" style="transform: rotate(180deg) translateX(230px) rotate(-180deg); animation-delay: -30s"><span class="orb-t">Kontolink</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="priser" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px) clamp(100px, 11vw, 160px)">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; margin-bottom: clamp(40px, 5vw, 64px)">
+<h2 style="margin: 0; max-width: 720px; font-weight: 600; font-size: clamp(38px, 4.6vw, 66px); line-height: 1.0; letter-spacing: -0.048em; text-wrap: balance">En fast pris. Ingen timer, der tikker.</h2>
+<p style="margin: 0; font-size: 19px; color: var(--mut)">Vælg det, der passer til dig, og se hvad der er med.</p>
+</div>
+<div style="border-radius: 40px; background: linear-gradient(180deg, #FFFFFF, #F9FBFB); box-shadow: var(--sh-3), var(--hl); padding: 12px; display: flex; flex-wrap: wrap; gap: 12px">
+<div class="dark" style="position: relative; overflow: hidden; flex: 1 1 460px; border-radius: 30px; background: linear-gradient(170deg, #24363F, #13222A); color: #FFFFFF; padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 28px; box-shadow: inset 0 1px 0 rgba(255,255,255,.12)">
+<div style="position: absolute; right: -100px; bottom: -140px; width: 380px; height: 380px; border-radius: 999px; background: radial-gradient(closest-side, rgba(255,110,30,0.40), rgba(255,110,30,0))" aria-hidden="true"></div>
+<div role="group" aria-label="Vælg pakke" style="position: relative; align-self: flex-start; display: flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 26px; background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.10)">
+<button type="button" class="tab" data-plan="selv" aria-pressed="true">Selvstændig</button>
+<button type="button" class="tab" data-plan="aps" aria-pressed="false">ApS</button>
+<button type="button" class="tab" data-plan="time" aria-pressed="false">Timebasis</button>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; color: #B9C7CC"><span data-f="who">Til enkeltmandsvirksomheder</span></span>
+<p style="margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px"><span data-f="fra" style="font-size: 18px; font-weight: 500; color: #D7E0E3">Fra</span><span style="font-weight: 600; font-size: clamp(56px, 6vw, 84px); letter-spacing: -0.055em; line-height: 1"><span data-f="price">1.200</span></span><span style="font-size: 16px; color: #B9C7CC"><span data-f="unit">kr./md. ekskl. moms</span></span></p>
+<p style="margin: 6px 0 0; max-width: 420px; font-size: 14px; line-height: 1.5; color: #B9C7CC"><span data-f="extra">Den faste pris fastsættes ud fra et tidsestimat efter opstartsgennemgangen. Du kender prisen, før vi går i gang.</span></p>
+</div>
+<div style="position: relative; margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px"><a href="/kontakt.html" class="btn-o" style="height: 58px; padding: 0 30px; font-size: 17px"><span data-f="cta">Kom i gang med Selvstændig</span></a><span style="display: flex; align-items: center; gap: 8px; font-size: 15px; color: #D7E0E3"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-500)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Første møde er gratis, 30 min.</span></div>
+</div>
+<div style="flex: 1 1 380px; padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 22px">
+<h3 style="margin: 0; font-weight: 600; font-size: 26px; letter-spacing: -0.03em"><span data-f="listTitle">Det er med i Selvstændig</span></h3>
+<ul data-f="features" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Løbende bogføring</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Bankafstemning</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Momsangivelser</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Afstemning af skattekontoen</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Løn til ansatte (indgår i den faste pris)</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Kvartalsvist møde om dit regnskab</li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Spørgsmål på telefon og mail</li>
+</ul>
+</div>
+</div>
+
+<div id="aarsafslutning" style="margin-top: clamp(64px, 8vw, 104px); display: flex; flex-direction: column; gap: clamp(28px, 4vw, 40px)">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+<h3 style="margin: 0; font-weight: 600; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.05; letter-spacing: -0.04em">Årsafslutning</h3>
+<p style="margin: 0; font-size: 19px; color: var(--mut)">Fast pris pr. år, aftalt på forhånd ud fra omfanget. Indberetning er altid med.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px">
+<div class="card" style="flex-direction: column">
+<div class="tint" style="padding: 28px 28px 30px; display: flex; flex-direction: column; gap: 4px">
+<h4 style="margin: 0; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Årsrapport</h4>
+<span style="font-size: 15px; color: #5B6970">Driftsselskab</span>
+<p style="margin: 18px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px"><span style="font-size: 16px; font-weight: 500; color: var(--mut)">Fra</span><span style="font-weight: 600; font-size: 48px; letter-spacing: -0.05em; line-height: 1">6.000</span><span style="font-size: 15px; color: #5B6970">kr. ekskl. moms pr. år</span></p>
+</div>
+<div style="padding: 20px 22px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 16px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Inkl. indberetning til Erhvervsstyrelsen og selvangivelse til SKAT</div>
+</div>
+<div class="card" style="flex-direction: column">
+<div class="tint" style="padding: 28px 28px 30px; display: flex; flex-direction: column; gap: 4px">
+<h4 style="margin: 0; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Årsrapport</h4>
+<span style="font-size: 15px; color: #5B6970">Holdingselskab</span>
+<p style="margin: 18px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px"><span style="font-size: 16px; font-weight: 500; color: var(--mut)">Fra</span><span style="font-weight: 600; font-size: 48px; letter-spacing: -0.05em; line-height: 1">3.000</span><span style="font-size: 15px; color: #5B6970">kr. ekskl. moms pr. år</span></p>
+</div>
+<div style="padding: 20px 22px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 16px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Inkl. indberetning til Erhvervsstyrelsen og selvangivelse til SKAT</div>
+</div>
+<div class="card" style="flex-direction: column">
+<div class="tint" style="padding: 28px 28px 30px; display: flex; flex-direction: column; gap: 4px">
+<h4 style="margin: 0; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Skatteregnskab</h4>
+<span style="font-size: 15px; color: #5B6970">Enkeltmandsvirksomhed</span>
+<p style="margin: 18px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px"><span style="font-size: 16px; font-weight: 500; color: var(--mut)">Fra</span><span style="font-weight: 600; font-size: 48px; letter-spacing: -0.05em; line-height: 1">4.000</span><span style="font-size: 15px; color: #5B6970">kr. ekskl. moms pr. år</span></p>
+</div>
+<div style="padding: 20px 22px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 16px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px"><circle cx="12" cy="12" r="12" style="fill: var(--g-900)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Inkl. indberetning til SKAT</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="partner" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px) clamp(100px, 11vw, 160px)">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; margin-bottom: clamp(40px, 5vw, 64px)">
+<h2 style="margin: 0; max-width: 820px; font-weight: 600; font-size: clamp(36px, 4.4vw, 62px); line-height: 1.0; letter-spacing: -0.048em; text-wrap: balance">Jeg sender dig videre, hvis jeg ikke er den rigtige partner.</h2>
+<p style="margin: 0; max-width: 540px; font-size: 19px; color: var(--mut)">Gennem mit netværk finder jeg det rigtige match. Også når det ikke er mig.</p>
+</div>
+<div style="position: relative; border-radius: 40px; background: linear-gradient(180deg, #FFFFFF, #F9FBFB); box-shadow: var(--sh-3), var(--hl); padding: 12px; display: flex; flex-wrap: wrap; gap: 12px">
+<div style="flex: 1 1 380px; border-radius: 30px; background: linear-gradient(170deg, var(--g-50), #FFFFFF); box-shadow: inset 0 0 0 1px var(--g-line); padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: center; gap: 12px"><span style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(180deg, var(--g-700), var(--g-900)); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 8px 16px -8px var(--g-sh)"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 6H38L52 20V54A4 4 0 0 1 48 58H16A4 4 0 0 1 12 54V10A4 4 0 0 1 16 6Z" fill="#FFFFFF"></path><path d="M38 6V16A4 4 0 0 0 42 20H52Z" style="fill: var(--g-300)"></path><path d="M21 37L29 45L43 29" fill="none" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--g-900)"></path></svg></span><span style="font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Det klarer jeg</span></div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-100)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)"></path></svg>Bogføring, moms og løn</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-100)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)"></path></svg>Årsrapport uden revision</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" style="fill: var(--g-100)"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--g-900)"></path></svg>Sparring om skat og struktur</li>
+</ul>
+</div>
+<div style="position: relative; overflow: hidden; flex: 1 1 380px; border-radius: 30px; background: linear-gradient(160deg, #FF8A3D, #F25A10); color: var(--ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); padding: clamp(28px, 4vw, 52px) clamp(28px, 4vw, 52px) clamp(28px, 4vw, 52px) clamp(28px, 5vw, 72px); display: flex; flex-direction: column; gap: 22px">
+<div style="position: absolute; right: -80px; top: -120px; width: 340px; height: 340px; border-radius: 999px; background: radial-gradient(closest-side, rgba(255,220,190,0.45), rgba(255,220,190,0))" aria-hidden="true"></div>
+<div style="position: relative; display: flex; align-items: center; gap: 12px"><span style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 15px; background: rgba(19,34,42,.12); box-shadow: inset 0 0 0 1px rgba(19,34,42,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l7 3v5c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9v-5z"></path><path d="M9 12l2.2 2.2 4-4.2"></path></svg></span><span style="font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Det klarer mit netværk</span></div>
+<ul style="position: relative; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#13222A" fill-opacity=".14"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#13222A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Revision og erklæringer</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#13222A" fill-opacity=".14"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#13222A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Vurderingsberetninger</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#13222A" fill-opacity=".14"></circle><path d="M7.4 12.3l3 3 6.2-6.4" fill="none" stroke="#13222A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>En løsning til en lavere pris, hvis min ikke passer</li>
+</ul>
+<p style="position: relative; margin: auto 0 0; font-size: 14px; color: #3A2312"><br></p>
+</div>
+<div class="seam" style="position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 999px; background: #FFFFFF; align-items: center; justify-content: center; box-shadow: 0 0 0 8px rgba(255,255,255,.6), 0 20px 40px -14px rgba(19,34,42,.45)" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F25A10" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13l-3.5-3.5M20 15H7l3.5 3.5"></path></svg></div>
+</div>
+</section>
+
+<section id="kontakt" style="max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px) clamp(80px, 9vw, 120px)">
+<div style="position: relative; overflow: hidden; border-radius: 40px; background: linear-gradient(160deg, var(--g-700), var(--g-950)); color: #FFFFFF; padding: clamp(48px, 7vw, 96px) clamp(32px, 6vw, 88px); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 40px 80px -40px var(--g-sh); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px">
+<div style="position: absolute; right: -160px; top: -200px; width: 620px; height: 620px; border-radius: 999px; background: radial-gradient(closest-side, var(--g-glow), rgba(255,255,255,0))" aria-hidden="true"></div>
+<div style="position: relative; flex: 1 1 420px; display: flex; flex-direction: column; gap: 18px; max-width: 600px">
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(36px, 4.4vw, 62px); line-height: 1.0; letter-spacing: -0.047em; text-wrap: balance">Lad os kigge på dit regnskab sammen.</h2>
+<p style="margin: 0; font-size: 19px; color: var(--g-soft)">Et gratis møde på 30 minutter, hvor vi finder ud af, om jeg er den rette til at hjælpe dig.</p>
+<a href="/kontakt.html" class="btn-o" style="margin-top: 14px; align-self: flex-start; gap: 12px; height: 60px; padding: 0 10px 0 28px; font-size: 17px">Book et gratis møde<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: rgba(19,34,42,0.12)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"></path></svg></span></a>
+</div>
+<div style="position: relative; flex: 0 0 auto; width: 300px; height: 360px; margin-right: clamp(0px, 4vw, 60px)">
+<div style="position: absolute; inset: 0; border-radius: 28px; background: rgba(255,255,255,.12); transform: rotate(6deg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16)" aria-hidden="true"></div>
+<div style="position: absolute; inset: 0; border-radius: 28px; background: #FFFFFF; padding: 6px; transform: rotate(-3deg); box-shadow: 0 40px 70px -30px rgba(0,0,0,.55)">
+<img src="/assets/img/jonas-engberg-helbo.jpg" alt="Jonas Engberg Helbo" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; border-radius: 22px">
+</div>
+<div style="position: absolute; right: -24px; top: 34px; display: flex; align-items: baseline; gap: 6px; padding: 9px 14px; border-radius: 999px; background: linear-gradient(180deg, #24363F, #13222A); color: #FFFFFF; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 18px 36px -14px rgba(0,0,0,.55)"><span style="font-weight: 600; font-size: 20px; letter-spacing: -0.035em; line-height: 1">4 års</span><span style="font-size: 13px; color: var(--g-soft)">erfaring</span></div>
+<div style="position: absolute; left: -36px; bottom: 30px; display: flex; flex-direction: column; padding: 14px 18px; border-radius: 18px; background: #FFFFFF; color: var(--ink); box-shadow: 0 20px 40px -16px rgba(0,0,0,.45), var(--hl)">
+<span style="font-weight: 600; font-size: 16px">Jonas Engberg Helbo</span>
+<span style="font-size: 13px; color: #5B6970">Indehaver og bogholder</span>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="dark" style="background: linear-gradient(180deg, #1A2A32, #101B21); color: #D7E0E3; padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 56px) 0; overflow: hidden">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px">
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 18px; max-width: 360px">
+<div style="display: flex; align-items: center; gap: 10px" role="img" aria-label="Helbo Regnskab"><svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 6H38L52 20V54A4 4 0 0 1 48 58H16A4 4 0 0 1 12 54V10A4 4 0 0 1 16 6Z" fill="#FFFFFF"></path><path d="M38 6V16A4 4 0 0 0 42 20H52Z" style="fill: var(--g-300)"></path><path d="M21 37L29 45L43 29" fill="none" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--g-900)"></path></svg><span style="font-family: Outfit, sans-serif; font-size: 28px; letter-spacing: -0.045em; line-height: 1; color: #FFFFFF; white-space: nowrap"><span style="font-weight: 600">helbo</span> <span style="font-weight: 300; color: var(--g-soft)">regnskab</span></span></div>
+<p style="margin: 0; font-size: 15px; color: #9FB0B6">Bogføring, moms og løn til selvstændige, ApS'er og holdingselskaber.</p>
+<a href="/kontakt.html" class="btn-o" style="align-self: flex-start; height: 50px; padding: 0 24px; font-size: 15px">Book en snak</a>
+</div>
+<div style="flex: 2 1 480px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 32px; font-size: 15px">
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-weight: 600; color: #FFFFFF">Ydelser</span><a href="#fordele">Bogføring</a><a href="#fordele">Moms og løn</a><a href="#aarsafslutning">Årsrapport</a><a href="#aarsafslutning">Holding og koncern</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-weight: 600; color: #FFFFFF">Virksomheden</span><a href="#saadan">Sådan foregår det</a><a href="#priser">Priser</a><a href="#partner">Samarbejdspartnere</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-weight: 600; color: #FFFFFF">Kontakt</span><a href="mailto:kontakt@helboregnskab.dk">kontakt@helboregnskab.dk</a><a href="tel:+4524873687">+45 24 87 36 87</a><span style="color: #9FB0B6">CVR 45320480</span><span style="color: #9FB0B6">Arresøvej 36, 4. th., 8240 Risskov</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-weight: 600; color: #FFFFFF">Juridisk</span><a href="/privatlivspolitik.html">Privatlivspolitik</a><a href="/forretningsbetingelser.html">Forretningsbetingelser</a></div>
+</div>
+</div>
+<div style="max-width: 1240px; margin: 56px auto 0; padding: 22px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-size: 13px; color: #8FA0A7; box-shadow: 0 -1px 0 rgba(255,255,255,.08)">
+<span>Helbo Regnskab ApS</span>
+<span>Helbo Regnskab afgiver ikke revisorerklæringer.</span>
+</div>
+<div style="max-width: 1240px; margin: 0 auto; font-family: Outfit, sans-serif; font-weight: 600; font-size: clamp(120px, 26vw, 380px); line-height: 0.78; letter-spacing: -0.06em; color: rgba(255,255,255,.05); white-space: nowrap; transform: translateY(14%)" aria-hidden="true">helbo</div>
+</footer>
+
+</div>
+<script>
+(function(){
+var plans={"selv": {"who": "Til enkeltmandsvirksomheder", "fra": true, "price": "1.200", "unit": "kr./md. ekskl. moms", "extra": "Den faste pris fastsættes ud fra et tidsestimat efter opstartsgennemgangen. Du kender prisen, før vi går i gang.", "cta": "Kom i gang med Selvstændig", "listTitle": "Det er med i Selvstændig", "features": ["Løbende bogføring", "Bankafstemning", "Momsangivelser", "Afstemning af skattekontoen", "Løn til ansatte (indgår i den faste pris)", "Kvartalsvist møde om dit regnskab", "Spørgsmål på telefon og mail"]}, "aps": {"who": "Til driftsselskaber", "fra": true, "price": "1.500", "unit": "kr./md. ekskl. moms", "extra": "Den faste pris fastsættes ud fra et tidsestimat efter opstartsgennemgangen. Du kender prisen, før vi går i gang.", "cta": "Kom i gang med ApS", "listTitle": "Det er med i ApS", "features": ["Løbende bogføring", "Bankafstemning", "Momsangivelser", "Afstemning af skattekontoen", "Løn til ansatte (indgår i den faste pris)", "Kvartalsvist møde om dit regnskab", "Spørgsmål på telefon og mail"]}, "time": {"who": "Til enkeltopgaver", "fra": false, "price": "800", "unit": "kr./time ekskl. moms", "extra": "Til opgaver uden for en fast aftale. Du får altid besked, før vi går i gang.", "cta": "Book et møde", "listTitle": "Det kan jeg fx hjælpe med", "features": ["Oprydning", "Bagudbogføring", "Rådgivning", "Sager med SKAT"]}}, li="<li style=\"display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: var(--sh-1); font-size: 17px\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"12\" style=\"fill: var(--g-900)\"></circle><path d=\"M7.4 12.3l3 3 6.2-6.4\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>{{f}}</li>";
+var root=document.getElementById('priser');
+function q(k){return root.querySelector('[data-f="'+k+'"]')}
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+function pick(id){
+  var p=plans[id];
+  ['who','price','unit','extra','cta','listTitle'].forEach(function(k){q(k).textContent=p[k]});
+  q('fra').style.display=p.fra?'inline':'none';
+  q('features').innerHTML=p.features.map(function(f){return li.replace('{{f}}',esc(f))}).join('');
+  root.querySelectorAll('.tab').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.plan===id?'true':'false')});
+}
+root.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){pick(b.dataset.plan)})});
+var btn=document.querySelector('.menu-btn'), panel=document.getElementById('mobilmenu');
+btn.addEventListener('click',function(){var o=panel.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false')});
+panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){panel.classList.remove('open');btn.setAttribute('aria-expanded','false')})});
+})();
+</script>
+</body>
+</html>
